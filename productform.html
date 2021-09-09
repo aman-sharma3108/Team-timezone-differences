@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Products</title>
+
+<meta charset="utf-8" />
+<meta name="description" content="Product form"  />
+<meta name="keywords" content="Form, Input" />
+<link href= "styles/style.css" rel="stylesheet"/>
+<!-- Description: Form Input for product -->
+<!-- Author: Calvin Bell -->
+<!-- Date: 07/09/21 -->
+
+</head>
+<body>
+	<header>
+        <h1>Digital Sales</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="productform.html">Products</a></li>      <!--nav bar-->
+            <li><a href="salesform.html">Sales</a></li>
+        </ul>
+    </nav>
+	<h1>Adding a product</h1>
+	<form method="POST" action="http://mercury.swin.edu.au/it000000/formtest.php">
+	<fieldset><legend>New Product Details</legend>
+		<p class="row">	<label for="productid">Product ID: </label>
+			<input type="text" name="productid" id="productid" /></p>
+		<p class="row">	<label for="productname">Product Name: </label>
+			<input type="text" name="productname" id="productname" /></p>
+        <p><label for="category">Category</label> 
+            <select name="category" id="category">
+                <option value="GSL">General Sales List</option>			
+                <option value="controlled">Controlled Drugs</option>
+                <option value="prescription">Prescription Only</option>
+                <option value="other">Other</option>
+            </select>
+        </p>
+		<p class="row">	<label for="price">Product Price: </label>
+			<input type="text" name="price" id="price" /></p>
+        <p><label for="comments">Comments</label>
+			<textarea id="comments" name="comments" rows="4" cols="40"></textarea>
+		</p>
+        <p><label for="stock">No. added to stock</label>
+            <input type="text" id="stock" name="stock" maxlength="4" size="2" />
+        </p>
+		<p>	<input type="submit" value="Add New Product" /></p>
+	</fieldset>
+	</form>
+</body>
+</html>
