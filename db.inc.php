@@ -22,6 +22,7 @@ if (!$dbSelected) //check if the database not exists
     mysqli_query($conn, $strSQL);
 }
 
+//create tables
 $strSQL = "CREATE TABLE IF NOT EXISTS products(
 	ProductID INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
 	ProductName TINYTEXT NOT NULL,
