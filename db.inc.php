@@ -28,7 +28,6 @@ $strSQL = "CREATE TABLE IF NOT EXISTS products(
 	Category TINYTEXT NOT NULL,
 	Price FLOAT(10,2) NOT NULL,
 	Comments TINYTEXT,
-	Prescription BOOLEAN,
 	Stock INT
 );
   CREATE TABLE IF NOT EXISTS sales(
