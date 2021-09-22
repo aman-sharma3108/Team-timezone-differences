@@ -1,0 +1,40 @@
+productform.html
+	productid	text
+	productname	text
+	category	category
+		GSL	
+		controlled
+		prescription
+		other
+	price		text
+	comments	text(area) (rows=4, cols=40)
+	stock		text (maxlength=4, size=2)
+
+salesform.html
+	saleid		text
+	dos		date //date of sale, maxlength 10, dd-mm-yyy
+	appt		time //time of sale
+	productname	text
+	qty		text maxlength=4, size=2
+	tprice		text
+	empid		text
+
+
+1. saleid might not be needed since it is an autoincrement
+might still use saleid for EDIT SALES page though.
+
+2. might have problems adding several products in at the same time, 
+need to do quantity of each, and total price by calculating. ->might not have been negotiated
+
+3. currently, total price would have to be calculated from server side and sent back to client.
+need to figure this out, particularly for multiple different items per sale.	
+
+4. until we get add product to work correctly, this might have to be put on hold
+
+5. one other thing to note, should stock be automatically reduced when a sale is made?
+
+6. Display(View) Page:
+	- individual searches only or Display All only?
+	- use a seperate result page for each search? -> makes layout cleaner. simple copy paste
+	- e.g. if we do search product, search sales, view all products, view all sales, thats 4 pages total
+	- then main View page will have links to all 4

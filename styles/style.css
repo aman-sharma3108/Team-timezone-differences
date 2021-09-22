@@ -1,0 +1,82 @@
+/*
+filename: style.css
+author: Vankong VENG
+created: 21/6/20  
+last modified: 21/6/20      
+description: all pages included in assessment folder
+*/
+footer {
+    width: 100%;
+    border-top: 3px solid #333;
+    text-align: center;
+    font-size: small;
+    padding: 1.5em;
+}
+
+* {
+    font-family:"Segoe UI",sans-serif;
+}
+
+body {
+    background-color: white; 
+    min-width: 750px;
+}
+
+section {
+    background-color: white;
+    padding: 1.5em;
+    line-height: 1.5;
+    text-align: center;
+}
+
+
+header {
+    background-color: goldenrod;
+    padding: 1.5em;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+form {
+    padding: 1.5em;
+    width: 30%;
+    line-height: 1.5;
+}
+
+.seminar { /*seminar text for <h2> on index.html*/
+    text-shadow: 3px 3px 3px darkorange;
+}
+
+/*nav bar*/
+nav ul {           
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+nav li {
+    float: left;
+}
+
+nav li a {
+    display: block;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    
+}
+
+nav li a:hover {
+    background: rgb(255, 153, 0);
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
