@@ -1,8 +1,6 @@
 "use strict"
 
 
-
-
 function init(){
     if (document.getElementById("new_sale") != null){
         var MaxInputs = 20;
@@ -34,8 +32,16 @@ function init(){
         });
 
         
-    }
+    };
+
+    var dropdowns = document.getElementById("dropbtn");
+    dropdowns.onclick = function (){
+      document.getElementById("myDropdown").classList.toggle("show");
+    };
 }
+  
+  // Close the dropdown menu if the user clicks outside of it
+ 
 
 function calc(){
     var InputsWrapper = $("#input_wrapper");
@@ -48,4 +54,13 @@ function calc(){
     });
     document.getElementById("tprice").value=total;
 }
+
+window.addEventListener("click", function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var myDropdown = document.getElementById("myDropdown");
+      if (myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
+      }
+    }
+});
 window.onload = init;
