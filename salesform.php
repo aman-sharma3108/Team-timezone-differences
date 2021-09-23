@@ -7,7 +7,6 @@
 <meta name="description" content="Product form"  />
 <meta name="keywords" content="Form, Input" />
 <link href= "styles/style.css" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="js/scripts.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"></script>
@@ -40,21 +39,21 @@
 	<h1>Making a new Sale</h1>
 
     <?php
+        var_dump($_SESSION["sales_form_error"]);
         if ($status == "not_submitted") echo "<p class='error'>Please fill in the form and submit!</p>";
         if ($status == "invalid_input") echo "<p class='error'>Invalid Input!</p>";
         if ($status == "success") echo "<p class='success'>Complete Sale successfully!</p>";
         if ($status == "database_error") echo "<p class='error'>Failed to add sale to database!</p>";
+        if ($status == "no_product_in_database") echo "<p class='error'>Please add products before adding sales</p>";
     ?>
 
-	<form method="post" action="http://mercury.swin.edu.au/it000000/formtest.php" id="new_sale">
+	<form method="POST" action="process_sales.php" id="new_sale">
 	<fieldset>
         <legend>Current Sale</legend>
             <p>
                 <label for="dos">Date of Sale</label> 
                 <input type="date" name= "dos" id="dos" placeholder="dd-mm-yyyy" maxlength="10" size="10" value="<?php if ($status == "invalid_input") echo $_SESSION["dos"] ?>"/>
             </p>
-
-
             <p>
                 <label for="time">Time of Sale:</label>
                 <input type="time" id="time" name="time" value="<?php if ($status == "invalid_input") echo $_SESSION["time"] ?>">
@@ -72,16 +71,54 @@
                 }
             ?>
             <div id="input_wrapper">
-            <p class="row">	
-                <label for="productname">Product: </label>
-                <!-- <input type="text" placeholder="Product ID" id="product0" name="product0" value="<?php if ($status == "invalid_input") echo $_SESSION["productname"] ?>"> -->
-                <input type="text" placeholder="Product ID" class="products" name="products[]" value="<?php if ($status == "invalid_input") echo $_SESSION["productname"] ?>">
-                x
-                <!-- <input type="text" placeholder="Quantity" id="quantity0" name="quantity0" maxlength="4" size="4" value="<?php if ($status == "invalid_input") echo $_SESSION["quantity"] ?>"/>  -->
-                <input type="text" placeholder="Quantity" class="quantities" name="quantities[]" maxlength="4" size="4" value="<?php if ($status == "invalid_input") echo $_SESSION["quantity"] ?>"/>
-                =
-                <input type="text" placeholder="Subtotal" class="subtotal" name="subtotal[]" onchange="calc()" size="6"/> 
-            </p>
+            <?php
+                //keep track of first product
+                $first = true;
+
+                //get count of products
+                if ($status == "invalid_input") {
+                    if (isset($_SESSION["product_count"])) $count = $_SESSION["product_count"];
+                    else $count = 1;
+                }
+                else $count = 1;
+                for ($i=0; $i<$count; $i++) {
+                    if ($status == "invalid_input") {
+                        //print errors
+                        if (in_array("products_empty".$i, $sales_form_error)) echo "<p class='error'>Please fill in Product ID</p>";
+                        elseif (in_array("products_invalid".$i, $sales_form_error)) echo "<p class='error'>Please fill in valid Product ID</p>";
+                        elseif (in_array("products_not_available".$i, $sales_form_error)) echo "<p class='error'>Product ID is not available in the database</p>";
+                        if (in_array("quantities_empty".$i, $sales_form_error)) echo "<p class='error'>Please fill in Quantity</p>";
+                        elseif (in_array("quantities_invalid".$i, $sales_form_error)) echo "<p class='error'>Please fill in valid Quantity</p>";
+                        if (in_array("subtotals_empty".$i, $sales_form_error)) echo "<p class='error'>Please fill in Subtotal</p>";
+                        elseif (in_array("subtotals_invalid".$i, $sales_form_error)) echo "<p class='error'>Please fill in valid Subtotal</p>";
+                        
+                        //get values previously inputted
+                        $product = $_SESSION["products"][$i]; 
+                        $quantity = $_SESSION["quantities"][$i];
+                        $subtotal = $_SESSION["subtotals"][$i];
+                    }
+                    else {
+                        $product = "";
+                        $quantity = "";
+                        $subtotal = "";
+                    }
+
+                    //print html products
+                    echo "<p class='row'>	
+                    <label for='productname'>Product: </label>
+                    <input type='text' placeholder='Product ID' class='products' name='products[]' value='$product'>
+                    x
+                    <input type='text' placeholder='Quantity' class='quantities' name='quantities[]' maxlength='4' size='4' value='$quantity'/>
+                    =
+                    <input type='text' placeholder='Subtotal' class='subtotals' name='subtotals[]' onchange='calc()' size='6' value='$subtotal'/> 
+                    </p>";
+                    
+                    //if is not first product, have delete button
+                    if (!$first) echo "<button type='button' class='removeclass'>x</button></p>";
+                    
+                    $first = false;
+                }
+            ?>
             </div>
             <div><button type="button" name="add" id="AddMoreFileBox">Add More</button></div>
 
@@ -119,7 +156,7 @@
             </p>
 
             <p>
-                <input type="submit" id="submit" value="Complete Sale" />
+                <input type="submit" id="submit" name="submit" value="Complete Sale" />
             </p>
             </fieldset>
 	</form>
