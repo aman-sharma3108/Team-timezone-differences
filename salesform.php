@@ -39,7 +39,6 @@
 	<h1>Making a new Sale</h1>
 
     <?php
-        var_dump($_SESSION["sales_form_error"]);
         if ($status == "not_submitted") echo "<p class='error'>Please fill in the form and submit!</p>";
         if ($status == "invalid_input") echo "<p class='error'>Invalid Input!</p>";
         if ($status == "success") echo "<p class='success'>Complete Sale successfully!</p>";
