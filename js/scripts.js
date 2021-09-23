@@ -32,6 +32,11 @@ function init(){
 
         
     }
+    
+    var dropdowns = document.getElementById("dropbtn");
+    dropdowns.onclick = function (){
+      document.getElementById("myDropdown").classList.toggle("show");
+    };
 }
 
 function calc(){
