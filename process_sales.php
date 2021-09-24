@@ -196,7 +196,7 @@
 
     //if database connection is set
     if ($connection) {
-        $insert_query = "INSERT INTO sales(SaleDate, PriceTotal, EmployeeID)
+        $insert_query = "INSERT INTO sales(SaleDateTime, PriceTotal, EmployeeID)
         VALUES ('$dos', '$tprice', '$empid');
         SET @last_sales_id = LAST_INSERT_ID();
         ";
