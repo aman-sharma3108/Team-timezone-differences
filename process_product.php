@@ -5,6 +5,7 @@
         $data = trim ($data);
         $data = stripslashes ($data);
         $data = htmlspecialchars ($data);
+        $data = str_replace(array("\r", "\n"), '', $data); //new line to filter line breaks
         return $data;
     }
 
