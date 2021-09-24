@@ -50,17 +50,9 @@
 	<fieldset>
         <legend>Current Sale</legend>
             <p>
-                <label for="dos">Date of Sale</label> 
-                <input type="date" name= "dos" id="dos" placeholder="dd-mm-yyyy" maxlength="10" size="10" value="<?php if ($status == "invalid_input") echo $_SESSION["dos"] ?>"/>
+                <label for="dos">Sale Date and Time</label> 
+                <input type="datetime-local" name= "dos" id="dos"  value="<?php if ($status == "invalid_input") echo $_SESSION["dos"] ?>"/>
             </p>
-            <p>
-                <label for="time">Time of Sale:</label>
-                <input type="time" id="time" name="time" value="<?php if ($status == "invalid_input") echo $_SESSION["time"] ?>">
-            </p>
-            <script>
-             var dt = new Date();
-             document.getElementById("time").innerHTML = dt.toLocaleTimeString();
-            </script>
 
 
             <?php
