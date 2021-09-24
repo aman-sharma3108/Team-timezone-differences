@@ -8,7 +8,6 @@
 <meta name="keywords" content="Form, Input" />
 <link href= "styles/style.css" rel="stylesheet"/>
 <script src="js/scripts.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"></script>
 <!-- Description: Form Input for sale -->
@@ -71,56 +70,88 @@
                 }
             ?>
             <div id="input_wrapper">
+                <p class='row'>	
+                    <label for='product_dropdown'>Product: </label>
+                    <select id="product_dropdown" onchange="getPrice()">
+                        <?php
+                            require_once("./includes/db.inc.php");
+                            if ($connection) {
+                                $select_query = "SELECT ProductID, ProductName FROM products";
+                                $result = mysqli_query($connection, $select_query);
+                                if (mysqli_num_rows($result) > 0) {
+                                    // output data of each row
+                                    while($row = mysqli_fetch_assoc($result)) {
+                                        $id = $row["ProductID"];
+                                        $name = $row["ProductName"];
+                                        echo "<option value='$id'>$name</option>";
+                                    }
+                                } else {
+                                    echo "<option value=''>Product Not Available!</option>";
+                                }
+                            }
+                        ?>
+                    </select>
+                    <label for='price_dropdown'>Price: </label>
+                    <select id="price_dropdown" disabled>
+                        <?php
+                            require_once("./includes/db.inc.php");
+                            if ($connection) {
+                                $select_query = "SELECT ProductID, Price FROM products";
+                                $result = mysqli_query($connection, $select_query);
+                                if (mysqli_num_rows($result) > 0) {
+                                    // output data of each row
+                                    while($row = mysqli_fetch_assoc($result)) {
+                                        $id = $row["ProductID"];
+                                        $price = $row["Price"];
+                                        echo "<option value='$id'>$price</option>";
+                                    }
+                                } else {
+                                    echo "<option value=''>Product Not Available!</option>";
+                                }
+                            }
+                        ?>
+                    </select>
+                    <label for='quantity'>Quantity: </label>
+                    <input type='text' placeholder='Quantity' id='quantity' onchange="calculateSubTotal()" maxlength='4' size='4'/>
+                    <input type='text' placeholder='Subtotal' id='subtotal' size='6' readonly/> 
+                    
+                    <div><button type="button" name="add" id="AddProduct">Add Product</button></div>
+                </p>
             <?php
-                //keep track of first product
-                $first = true;
+                $count = 0;
 
                 //get count of products
                 if ($status == "invalid_input") {
                     if (isset($_SESSION["product_count"])) $count = $_SESSION["product_count"];
-                    else $count = 1;
                 }
-                else $count = 1;
                 for ($i=0; $i<$count; $i++) {
-                    if ($status == "invalid_input") {
-                        //print errors
-                        if (in_array("products_empty".$i, $sales_form_error)) echo "<p class='error'>Please fill in Product ID</p>";
-                        elseif (in_array("products_invalid".$i, $sales_form_error)) echo "<p class='error'>Please fill in valid Product ID</p>";
-                        elseif (in_array("products_not_available".$i, $sales_form_error)) echo "<p class='error'>Product ID is not available in the database</p>";
-                        if (in_array("quantities_empty".$i, $sales_form_error)) echo "<p class='error'>Please fill in Quantity</p>";
-                        elseif (in_array("quantities_invalid".$i, $sales_form_error)) echo "<p class='error'>Please fill in valid Quantity</p>";
-                        if (in_array("subtotals_empty".$i, $sales_form_error)) echo "<p class='error'>Please fill in Subtotal</p>";
-                        elseif (in_array("subtotals_invalid".$i, $sales_form_error)) echo "<p class='error'>Please fill in valid Subtotal</p>";
-                        
-                        //get values previously inputted
-                        $product = $_SESSION["products"][$i]; 
-                        $quantity = $_SESSION["quantities"][$i];
-                        $subtotal = $_SESSION["subtotals"][$i];
-                    }
-                    else {
-                        $product = "";
-                        $quantity = "";
-                        $subtotal = "";
-                    }
+                    //print errors
+                    if (in_array("products_empty".$i, $sales_form_error)) echo "<p class='error'>Please fill in Product ID</p>";
+                    elseif (in_array("products_invalid".$i, $sales_form_error)) echo "<p class='error'>Please fill in valid Product ID</p>";
+                    elseif (in_array("products_not_available".$i, $sales_form_error)) echo "<p class='error'>Product ID is not available in the database</p>";
+                    if (in_array("quantities_empty".$i, $sales_form_error)) echo "<p class='error'>Please fill in Quantity</p>";
+                    elseif (in_array("quantities_invalid".$i, $sales_form_error)) echo "<p class='error'>Please fill in valid Quantity</p>";
+                    if (in_array("subtotals_empty".$i, $sales_form_error)) echo "<p class='error'>Please fill in Subtotal</p>";
+                    elseif (in_array("subtotals_invalid".$i, $sales_form_error)) echo "<p class='error'>Please fill in valid Subtotal</p>";
+                    
+                    //get values previously inputted
+                    $product = $_SESSION["products"][$i]; 
+                    $quantity = $_SESSION["quantities"][$i];
+                    $subtotal = $_SESSION["subtotals"][$i];
 
                     //print html products
                     echo "<p class='row'>	
                     <label for='productname'>Product: </label>
-                    <input type='text' placeholder='Product ID' class='products' name='products[]' value='$product'>
+                    <input type='text' placeholder='Product ID' class='products' name='products[]' value='$product' readonly>
                     x
-                    <input type='text' placeholder='Quantity' class='quantities' name='quantities[]' maxlength='4' size='4' value='$quantity'/>
+                    <input type='text' placeholder='Quantity' class='quantities' name='quantities[]' maxlength='4' size='4' value='$quantity' readonly/>
                     =
-                    <input type='text' placeholder='Subtotal' class='subtotals' name='subtotals[]' onchange='calc()' size='6' value='$subtotal'/> 
-                    </p>";
-                    
-                    //if is not first product, have delete button
-                    if (!$first) echo "<button type='button' class='removeclass'>x</button></p>";
-                    
-                    $first = false;
+                    <input type='text' placeholder='Subtotal' class='subtotals' name='subtotals[]' onchange='calc()' size='6' value='$subtotal' readonly/> 
+                    </p>
+                    <button type='button' class='removeclass'>x</button></p>";
                 }
             ?>
             </div>
-            <div><button type="button" name="add" id="AddMoreFileBox">Add More</button></div>
 
 
             <?php
@@ -133,13 +164,13 @@
 
             ||||<?php
                 if ($sales_form_error != null) {
-                    if (in_array("tprice_empty", $sales_form_error)) echo "<p class='error'>-------</p>";
-                    elseif (in_array("tprice_invalid", $sales_form_error)) echo "<p class='error'>---------</p>";
+                    if (in_array("tprice_empty", $sales_form_error)) echo "<p class='error'>Please fill in the Products</p>";
+                    elseif (in_array("tprice_invalid", $sales_form_error)) echo "<p class='error'>The total is not valid</p>";
                 }
             ?>
-                                                                       <!-- price needs to be automatically input based on quantity needed -->                      
+                               
             <p class="row">	<label for="tprice">Total Price: </label>
-                <input type="text" name="tprice" id="tprice" value="<?php if ($status == "invalid_input") echo $_SESSION["tprice"] ?>"/>
+                <input type="text" name="tprice" id="tprice" value="<?php if ($status == "invalid_input") echo $_SESSION["tprice"] ?>" readonly/>
             </p>
             ||||
 
