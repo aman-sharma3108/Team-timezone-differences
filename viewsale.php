@@ -22,18 +22,18 @@
     <?php
         require_once ("./includes/db.inc.php");
 
-        $query="select SaleID, SaleDate, PriceTotal, EmployeeID from sales;";
+        $query="select SaleID, SaleDateTime, PriceTotal, EmployeeID from sales;";
         $result=mysqli_query($connection, $query);
         if (!$result) {
             echo "<p>Something is wrong with " , $query, "</p>";
         }
         else {
             echo "<table border='1'>\n";
-            echo "<tr><th>SaleID</th><th>SaleDate</th><th>PriceTotal</th><th>EmployeeID</th></tr>\n";
+            echo "<tr><th>SaleID</th><th>SaleDateTime</th><th>PriceTotal</th><th>EmployeeID</th></tr>\n";
 
             while ($row=mysqli_fetch_assoc($result)){
                 echo "<tr><td>", $row["SaleID"], "</td>\n";
-                echo "<td>", $row["SaleDate"], "</td>\n";
+                echo "<td>", $row["SaleDateTime"], "</td>\n";
                 echo "<td>", $row["PriceTotal"], "</td>\n";
                 echo "<td>", $row["EmployeeID"], "</td>\n";
             }
