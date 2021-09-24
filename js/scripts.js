@@ -5,28 +5,27 @@
 
 function init(){
     if (document.getElementById("new_sale") != null){
-        var MaxInputs = 10;
         var InputsWrapper = $("#input_wrapper");
-        var AddButton = document.getElementById("AddMoreFileBox");
-        var x = InputsWrapper.length;
+        var AddButton = document.getElementById("AddProduct");
         
         
         AddButton.onclick = function (){
-            if(x < MaxInputs)
-            {
-                $(InputsWrapper).append('<p class="row"><label for="productname">Product: </label><input type="text" placeholder="Product ID" class="products" name="products[]"> x <input type="text" placeholder="Quantity" class="quantities" name="quantities[]" maxlength="4" size="4"/> = <input type="text" placeholder="Subtotal" class="subtotals" onchange="calc()" name="subtotals[]" size="6"/> <button type="button" class="removeclass">x</button></p>');
-                x++;
-            }
-        return false;
+            var ProductID = document.getElementById("product_dropdown").value;
+            var ProductName = $('#product_dropdown option:selected').text();
+            var ProductQuantity = document.getElementById("quantity").value;
+            var ProductSubTotal = document.getElementById("subtotal").value;
+            $(InputsWrapper).append('<p class="row"><label for="productname">Product: </label><input type="text" placeholder="Product ID" class="products" name="products[]" value="'+ProductID+'" readonly> <input type="text" placeholder="Product Name" value="'+ProductName+'" readonly> x <input type="text" placeholder="Quantity" class="quantities" name="quantities[]" value="'+ProductQuantity+'" readonly/> = <input type="text" placeholder="Subtotal" class="subtotals" name="subtotals[]" value="'+ProductSubTotal+'" readonly/> <button type="button" class="removeclass">x</button></p>');
+            calculateTotal();
+            //reset quantity
+            document.getElementById("quantity").value = null;
+            calculateSubTotal();
+            return false;
         };
 
         
         $("body").on("click",".removeclass", function(e){
-            if(x > 1){
-                $(this).parent('p').remove();
-                x--;
-            }
-            calc();
+            $(this).parent('p').remove();
+            calculateTotal();
         return false;
         });
 
@@ -39,15 +38,26 @@ function init(){
     };
 }
 
-function calc(){
-    var InputsWrapper = $("#input_wrapper");
-    var x = InputsWrapper.length;
+function getPrice() {
+    var ProductDropDownValue = document.getElementById("product_dropdown").value;
+    document.getElementById("price_dropdown").value = ProductDropDownValue;
+    calculateSubTotal();
+    return false;
+}
+
+function calculateSubTotal() {
+    var Price = parseFloat($('#price_dropdown option:selected').text());
+    var Quantity = document.getElementById("quantity").value;
+    var SubTotal = Price * Quantity;
+    document.getElementById("subtotal").value = SubTotal;
+}
+
+function calculateTotal(){
     var total = 0;
-    
-    $('.subtotal').each(function(){
+    $('.subtotals').each(function(){
         total = total+parseFloat($(this).val());
-        
     });
+    console.log(total);
     document.getElementById("tprice").value=total;
 }
 window.onload = init;
