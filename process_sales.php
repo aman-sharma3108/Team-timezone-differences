@@ -29,7 +29,7 @@
     }
     else {
         //Return to sales form
-        header ("location: salesform.php?status=not_submited");
+        header ("location: salesform.php?status=not_submitted");
         exit;
     }
 
@@ -43,7 +43,7 @@
     }
     else {
         //Return to sales form
-        header ("location: salesform.php?status=not_submited");
+        header ("location: salesform.php?status=not_submitted");
         exit;
     }
 
@@ -61,7 +61,7 @@
     }
     else {
         //Return to sales form
-        header ("location: salesform.php?status=not_submited");
+        header ("location: salesform.php?status=not_submitted");
         exit;
     }
     
@@ -79,7 +79,7 @@
     }
     else {
         //Return to sales form
-        header ("location: salesform.php?status=not_submited");
+        header ("location: salesform.php?status=not_submitted");
         exit;
     }
 
@@ -125,7 +125,7 @@
     }
     else {
         //Return to sales form
-        header ("location: salesform.php?status=not_submited");
+        header ("location: salesform.php?status=not_submitted");
         exit;
     }
 
@@ -148,7 +148,7 @@
     }
     else {
         //Return to sales form
-        header ("location: salesform.php?status=not_submited");
+        header ("location: salesform.php?status=not_submitted");
         exit;
     }
 
@@ -171,7 +171,7 @@
     }
     else {
         //Return to sales form
-        header ("location: salesform.php?status=not_submited");
+        header ("location: salesform.php?status=not_submitted");
         exit;
     }
     
