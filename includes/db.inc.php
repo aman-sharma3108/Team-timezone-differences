@@ -50,7 +50,7 @@ if ($connection) {
 	
 	CREATE TABLE IF NOT EXISTS sales(
 		SaleID INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-		SaleDate DATE NOT NULL,
+		SaleDateTime DATETIME NOT NULL,
 		PriceTotal FLOAT(10,2) NOT NULL,
 		EmployeeID INT NOT NULL
 	);
