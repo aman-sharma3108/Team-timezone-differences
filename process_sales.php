@@ -6,7 +6,6 @@
         $data = trim ($data);
         $data = stripslashes ($data);
         $data = htmlspecialchars ($data);
-        $data = str_replace(array("\r", "\n"), '', $data); //new line to filter line breaks
         return $data;
     }
 
@@ -34,19 +33,6 @@
         exit;
     }
 
-    //process date of sales
-    if (isset($_POST["time"])) {
-        $time = sanitise_input($_POST["time"]);
-        if ($time == "") {
-            $sales_form_error[] = "time_empty";
-            $result = false;
-        };
-    }
-    else {
-        //Return to sales form
-        header ("location: salesform.php?status=not_submitted");
-        exit;
-    }
 
     //process total price
     if (isset($_POST["tprice"])) {
@@ -180,7 +166,6 @@
     $product_count = count($products);
 
     $_SESSION["dos"] = $dos;
-    $_SESSION["time"] = $time;
     $_SESSION["tprice"] = $tprice;
     $_SESSION["empid"] = $empid;
     $_SESSION["product_count"] = $product_count;
