@@ -8,6 +8,7 @@
 <meta name="keywords" content="Form, Input" />
 <link href= "styles/style.css" rel="stylesheet"/>
 <script src="js/scripts.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"></script>
 <!-- Description: Form Input for sale -->
@@ -53,7 +54,6 @@
                 <label for="dos">Sale Date and Time</label> 
                 <input type="datetime-local" name= "dos" id="dos"  value="<?php if ($status == "invalid_input") echo $_SESSION["dos"] ?>"/>
             </p>
-
 
             <?php
                 if ($sales_form_error != null) {
@@ -109,6 +109,7 @@
                     
                     <div><button type="button" name="add" id="AddProduct">Add Product</button></div>
                 </p>
+                
             <?php
                 $count = 0;
 
@@ -189,3 +190,5 @@
     ?>
 </body>
 </html>
+
+
