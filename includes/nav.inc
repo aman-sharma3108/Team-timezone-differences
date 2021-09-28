@@ -10,9 +10,9 @@ echo "
             <div id='myDropdown' class='dropdown-content'>
                 <a href='viewproduct.php'>All Products</a>
                 <a href='viewsale.php'>All Sales</a>
+                <a href='viewsaledetails.php'>All Sales Details</a>
             </div>   
     </div>
-    <a href='query.php'>Query</a>
     <a id='logout' href='logout.php'>Log Out</a>
 </div>";
 ?>
