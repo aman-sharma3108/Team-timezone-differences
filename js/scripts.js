@@ -31,7 +31,6 @@ function init(){
 
         var aestTime = new Date().toLocaleString("en-US", {timeZone: "Australia/Melbourne"});
         aestTime = new Date(aestTime);
-        document.getElementById('time').value = aestTime.getHours() + ":" +aestTime.getMinutes();
         var year = aestTime.getFullYear();
         var month = aestTime.getMonth() + 1;
         var day = aestTime.getDate();
@@ -41,13 +40,13 @@ function init(){
         if (day < 10){
           day = "0" + day;
         }
-        document.getElementById('dos').value = year + "-" +month + "-" +day;
+        document.getElementById('dos').value = year + "-" +month + "-" +day +"T"+ aestTime.getHours() + ":" +aestTime.getMinutes();
         
     }
     
     var dropdowns = document.getElementById("dropbtn");
     dropdowns.onclick = function (){
-      document.getElementById("myDropdown").classList.toggle("show");
+        document.getElementById("myDropdown").classList.toggle("show");
     };
 }
 
