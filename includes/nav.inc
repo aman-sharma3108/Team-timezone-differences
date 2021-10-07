@@ -13,6 +13,7 @@ echo "
                 <a href='viewsaledetails.php'>All Sales Details</a>
             </div>   
     </div>
+    <a href='employeeform.php'>Add Employee</a></li>
     <a id='logout' href='logout.php'>Log Out</a>
 </div>";
 ?>
