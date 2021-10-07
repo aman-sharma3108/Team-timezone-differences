@@ -1,3 +1,11 @@
+<?php 
+
+session_start();
+
+if (isset($_SESSION['UserID']) && isset($_SESSION['Username'])) {
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,7 +30,7 @@
     ?>
 
     <section>
-        <h2>Welcome To The Digital Catalogue System.</h2>
+        <h2>Hello, <?php echo $_SESSION['Firstname']; ?>. Welcome To The Digital Catalogue System.</h2>
         <p>
             Current Page: Home
         </p>
@@ -51,3 +59,15 @@
     ?>
 </body>
 </html>
+
+<?php 
+
+}else{
+
+     header("Location: login.php");
+
+     exit();
+
+}
+
+ ?>
