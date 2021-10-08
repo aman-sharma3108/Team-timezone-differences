@@ -155,7 +155,7 @@
             ?>
             
 
-            ||||<?php
+            <?php
                 if ($sales_form_error != null) {
                     if (in_array("tprice_empty", $sales_form_error)) echo "<p class='error'>Please fill in the Products</p>";
                     elseif (in_array("tprice_invalid", $sales_form_error)) echo "<p class='error'>The total is not valid</p>";
@@ -165,7 +165,7 @@
             <p class="row">	<label for="tprice">Total Price: </label>
                 <input type="text" name="tprice" id="tprice" value="<?php if ($status == "invalid_input") echo $_SESSION["tprice"] ?>" readonly/>
             </p>
-            ||||
+            
 
 
             <?php
