@@ -52,7 +52,7 @@
         <?php
                 if ($employee_form_error != null) {
                     if (in_array("employee_uname_empty", $employee_form_error)) echo "<p class='error'>Please fill in Employee Username</p>";
-                    elseif (in_array("employee_uname_invalid", $employee_form_error)) echo "<p class='error'>Please include numbers when filling in Employee Username</p>";
+                    elseif (in_array("employee_uname_invalid", $employee_form_error)) echo "<p class='error'>Username must be at least 5 characters long and include a number</p>";
                 }
             ?>
             <p class="row">	
@@ -85,7 +85,7 @@
             <?php
                 if ($employee_form_error != null) {
                     if (in_array("employee_pass_empty", $employee_form_error)) echo "<p class='error'>Please fill in Employee Password</p>";
-                    elseif (in_array("employee_pass_invalid", $employee_form_error)) echo "<p class='error'>Please include numbers when filling in Employee Password</p>";
+                    elseif (in_array("employee_pass_invalid", $employee_form_error)) echo "<p class='error'>Password must be at least 5 characters long and include a number</p>";
                 }
             ?>
             <p class="row">	
