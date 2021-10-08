@@ -4,6 +4,11 @@
 
 
 function init(){
+    var dropdowns = document.getElementById("dropbtn");
+    dropdowns.onclick = function (){
+      document.getElementById("myDropdown").classList.toggle("show");
+    };
+    
     if (document.getElementById("new_sale") != null){
         var InputsWrapper = $("#input_wrapper");
         var AddButton = document.getElementById("AddProduct");
@@ -44,11 +49,6 @@ function init(){
         document.getElementById('dos').value = year + "-" +month + "-" +day;
         
     }
-    
-    var dropdowns = document.getElementById("dropbtn");
-    dropdowns.onclick = function (){
-      document.getElementById("myDropdown").classList.toggle("show");
-    };
 }
 
 function getPrice() {
