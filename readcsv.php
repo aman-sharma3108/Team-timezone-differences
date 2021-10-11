@@ -8,6 +8,7 @@
 <meta name="keywords" content="Form, Input" />
 <link href= "styles/style.css" rel="stylesheet"/>
 <script src="js/csv.js"></script>
+<script src="js/scripts.js"></script>
 
 </head>
 <body>
