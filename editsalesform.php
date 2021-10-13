@@ -57,13 +57,13 @@
                 }
             ?>
             <p class="row">	
-                <label for="dos">Sale Date and Time</label> 
-                <input type="text" name= "dos" id="dos"/>
+                <label for="sale_id">Sale ID: </label>
+                <input type="text" name="sale_id" id="sale_id" value="<?php if ($status == "invalid_input") echo $_SESSION["sale_id"] ?>"/>
             </p>
             
             <p>
                 <label for="dos">Sale Date and Time</label> 
-                <input type="datetime-local" name= "dos" id="dos"  value="<?php if ($status == "invalid_input") echo $_SESSION["dos"] ?>"/>
+                <input type="text" name= "dos" id="dos"/>
             </p>
 
             <?php
