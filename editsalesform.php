@@ -57,8 +57,8 @@
                 }
             ?>
             <p class="row">	
-                <label for="sale_id">Sale ID: </label>
-                <input type="text" name="sale_id" id="sale_id" value="<?php if ($status == "invalid_input") echo $_SESSION["sale_id"] ?>"/>
+                <label for="dos">Sale Date and Time</label> 
+                <input type="text" name= "dos" id="dos"/>
             </p>
             
             <p>
