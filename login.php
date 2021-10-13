@@ -6,7 +6,7 @@
     <meta name="keywords" content="Sales, System" />
     <meta name="author" content="Team Timezone Differences"  />
     <title>LOGIN</title>
-    <link href= "styles/" rel="stylesheet"/>
+    <link href= "styles/styles1.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.17/jquery-ui.min.js"></script>
