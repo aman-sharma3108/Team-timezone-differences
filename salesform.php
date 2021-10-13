@@ -52,7 +52,7 @@
         <legend>Current Sale</legend>
             <p>
                 <label for="dos">Sale Date and Time</label> 
-                <input type="datetime-local" name= "dos" id="dos"  value="<?php if ($status == "invalid_input") echo $_SESSION["dos"] ?>"/>
+                <input type="text" name= "dos" id="dos"/>
             </p>
 
             <?php
