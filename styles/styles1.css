@@ -1,0 +1,120 @@
+body {
+
+    background: goldenrod;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    height: 100vh;
+
+    flex-direction: column;
+    
+    background-image:  url(images/back.jpg); /* link for image used https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.lsretail.com%2Fresources%2Finnovative-pharmacies-that-are-setting-new-standards-in-customer-service&psig=AOvVaw0Qj5dl9W60523x9Y99j26H&ust=1634221270302000&source=images&cd=vfe&ved=0CAwQjhxqFwoTCLCzoNrKx_MCFQAAAAAdAAAAABA0 */
+    background-position: relative;
+}
+
+section{
+    padding-top:8% ;
+}
+
+form {
+    
+    width: 600px;
+
+    border: 5px solid goldenrod;
+
+    padding: 20px;
+
+    background:#333;
+
+    border-radius: 20px;
+
+}
+
+h2 {
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    color: white;
+
+}
+
+input {
+
+    display: block;
+
+    border: 2px solid #ccc;
+
+    width: 95%;
+
+    padding: 10px;
+
+    margin: 10px auto;
+
+    border-radius: 5px;
+
+}
+
+label {
+
+    color: rgb(255, 255, 255);
+
+    font-size: 18px;
+
+    padding: 10px;
+
+}
+
+button {
+
+    background: rgb(202, 171, 35);
+
+    padding: 12px 30px;
+
+    color: #fff;
+
+    border-radius: 10px;
+
+    margin-left: 20em;
+
+    border: none;
+
+}
+
+button:hover{
+
+    opacity: .10;
+
+}
+
+.error {
+
+   background: red;
+
+   color: #0c0101;
+
+   padding: 10px;
+
+   width: 25%;
+
+   border-radius: 5px;
+
+   margin: 15px auto;
+
+   margin-left: 4px;
+
+}
+
+footer {
+    width: 101%;
+    border-top: 2px solid #333;
+    text-align: center;
+    font-size: medium;
+    margin-top: 6em;
+    background-color: goldenrod;
+}
