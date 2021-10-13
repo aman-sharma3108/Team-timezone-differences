@@ -9,6 +9,21 @@ function init(){
       document.getElementById("myDropdown").classList.toggle("show");
     };
     
+    var TimePeriodDropdown = document.getElementById("time_period");
+    if (TimePeriodDropdown != null) {
+        TimePeriodDropdown.onchange = function () {
+            var timeperiod = this.value;
+            document.getElementById("monthly").setAttribute("hidden","hidden");
+            document.getElementById("weekly").setAttribute("hidden", "hidden");
+            if (timeperiod=="monthly") {
+                document.getElementById("monthly").removeAttribute("hidden");
+            }
+            if (timeperiod=="weekly") {
+                document.getElementById("weekly").removeAttribute("hidden");
+            }
+        };
+    }
+    
     if (document.getElementById("new_sale") != null){
         var InputsWrapper = $("#input_wrapper");
         var AddButton = document.getElementById("AddProduct");
