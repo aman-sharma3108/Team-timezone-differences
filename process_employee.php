@@ -88,12 +88,21 @@
         header ("location: employeeform.php?status=not_submited");
         exit;
     }
+
+    //process category
+    if (isset($_POST["role"])) {
+        $role = sanitise_input($_POST["role"]);
+    }
+    else {
+        //Return to enquire form
+        header ("location: employeeform.php?status=not_submited");
+        exit;
+    }
       
 
     $_SESSION["emp_uname"] = $emp_uname;
     $_SESSION["emp_fname"] = $emp_fname;
     $_SESSION["emp_lname"] = $emp_lname;
-    $_SESSION["emp_pass"] = $emp_pass;
     $_SESSION["employee_form_error"] = $employee_form_error;
 
     if ($result == false) {
@@ -106,17 +115,58 @@
 
     //if database connection is set
     if ($connection) {
-        $insert_query = "INSERT INTO users (Username, Firstname, Lastname, Password)
-        VALUES ('$emp_uname', '$emp_fname', '$emp_lname', '$emp_pass');";
-        
-        $execute_result = mysqli_query($connection, $insert_query);
 
-        if ($execute_result) { //execute query successfully
-            header("Location: employeeform.php?status=success");
+        //check if the username exists in the database
+        $check_user_query = "SELECT Username FROM users WHERE Username=?;"; //prepare statement to increase security of database
+        $statement = mysqli_stmt_init($connection);
+        if (!mysqli_stmt_prepare($statement, $check_user_query)) //check if the database is failed
+        {
+            header ("Location: employeeform.php?error=sqlerror"); //return to the Register page with a message that the database is failed
+            exit();
         }
-        else {
-            header("Location: employeeform.php?status=database_error");
+        else //the database is not failed
+        {
+            mysqli_stmt_bind_param($statement, "s", $emp_uname); //insert data to statement
+            mysqli_stmt_execute($statement);
+            mysqli_stmt_store_result($statement);
+            $intResultCheck = mysqli_stmt_num_rows($statement); //return number of rows of matched username
+            if ($intResultCheck > 0) //the username exists
+            {
+                header ("Location: employeeform.php?error=usertaken"); //return to the Register page with a message that the username was taken
+            exit();
+            }
+            else
+            {
+                $insert_query = "INSERT INTO users(Username, Firstname, Lastname, Password, Role) VALUE(?,'$emp_fname','$emp_lname',?, '$role');"; //prepare statement to increase security of database
+                $statement = mysqli_stmt_init($connection);
+                if (!mysqli_stmt_prepare($statement, $insert_query)) //check if the database is failed
+                {
+                    header ("Location: employeeform.php?error=sqlerror"); //return to the Register page with a message that the database is failed
+                    exit();
+                }
+                else //the database is not failed
+                {
+                    $hashed_pass = password_hash($emp_pass, PASSWORD_DEFAULT); //hash password to increase security
+                    mysqli_stmt_bind_param($statement, "ss", $emp_uname, $hashed_pass); //insert data to statement
+                    mysqli_stmt_execute($statement);
+                    mysqli_stmt_store_result($statement);
+                    header ("Location: employeeform.php?register=success&&username=".$emp_uname); //return to the Login page with a message the register is successful
+                    exit();
+                }
+            }
         }
-        mysqli_close($connection);// Close the database connect
+
+        // $insert_query = "INSERT INTO users (Username, Firstname, Lastname, Password)
+        // VALUES ('$emp_uname', '$emp_fname', '$emp_lname', '$emp_pass');";
+        
+        // $execute_result = mysqli_query($connection, $insert_query);
+
+        // if ($execute_result) { //execute query successfully
+        //     header("Location: employeeform.php?status=success");
+        // }
+        // else {
+        //     header("Location: employeeform.php?status=database_error");
+        // }
+        // mysqli_close($connection);// Close the database connect
     }
 ?>
