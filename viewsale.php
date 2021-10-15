@@ -19,6 +19,7 @@
         include "./includes/nav.inc";
     ?>
     <h1>Displaying All Sales</h1>
+    <div class="art2">
     <?php
         require_once ("./includes/db.inc.php");
 
@@ -43,10 +44,11 @@
         
         mysqli_close($connection);
     ?>
-    <button type="button" onclick="tableToCSV()">
+    </div>
+    <button type="button" onclick="tableToCSV()" class="butt1">
         Download
     </button>
-
+<br><br>
     <script type="text/javascript">
         function tableToCSV() {
             var csv_data = [];

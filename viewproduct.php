@@ -18,7 +18,9 @@
         include "./includes/header.inc";
         include "./includes/nav.inc";
     ?>
-    <h1>Displaying All Products</h1>
+    <article class="art">
+        <div class="art2">
+    <h1 class="head">Displaying All Products</h1>
     <?php
         require_once ("./includes/db.inc.php");
 
@@ -45,12 +47,12 @@
         
         mysqli_close($connection);
     ?>
-
+</div>
     <!-- start of download section-->
-    <button type="button" onclick="tableToCSV()">
+    <button type="button" onclick="tableToCSV()" class="butt">
         Download
     </button>
-
+</article>
     <script type="text/javascript">
         function tableToCSV() {
             var csv_data = [];
@@ -95,12 +97,10 @@
         session_start();
 
         function select_category($category) {
-            if (isset($_SESSION["category"])) {
-                if ($_SESSION["category"] == $category) {
-                    echo " selected=\"selected\"";
-                }
+            if ($_SESSION["category"] == $category) {
+              echo " selected=\"selected\"";
             }
-        }
+          }
 
         if(isset($_GET["status"]))
         {
