@@ -21,10 +21,12 @@
         session_start();
 
         function select_category($category) {
-            if ($_SESSION["category"] == $category) {
-              echo " selected=\"selected\"";
+            if (isset($_SESSION["category"])) {
+                if ($_SESSION["category"] == $category) {
+                    echo " selected=\"selected\"";
+                }
             }
-          }
+        }
 
         if(isset($_GET["status"]))
         {

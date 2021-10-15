@@ -38,6 +38,7 @@ if (!$selected_database) //check if the database not exists
 $connection = mysqli_connect($servername, $username, $password, $database); //create connection to server
 
 if ($connection) {
+	$hashed_pass = password_hash('admin', PASSWORD_DEFAULT); //hash password to increase security
 	//create tables
 	$query = "CREATE TABLE IF NOT EXISTS products(
 		ProductID INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
@@ -62,10 +63,24 @@ if ($connection) {
 		SubTotal FLOAT(10,2) NOT NULL,
 		FOREIGN KEY (SaleID) references sales(SaleID),
 		FOREIGN KEY (ProductID) references products(ProductID)
-	);";
+	);
+	
+	CREATE TABLE IF NOT EXISTS users(
+		UserID INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+		Username VARCHAR(30) NOT NULL,
+		Firstname VARCHAR(30) NOT NULL,
+		Lastname VARCHAR(30) NOT NULL,
+        Password longtext NOT NULL,
+		Role VARCHAR(30) NOT NULL    
+	);
+	
+	INSERT INTO users (Username, Firstname, Lastname, Password, Role)
+	SELECT * FROM (SELECT 'admin' AS Username, 'Administrator' AS Firstname, 'Manager' AS Lastname, '$hashed_pass' AS Password, 'manager' AS Role) AS tmp
+	WHERE NOT EXISTS (
+		SELECT Username FROM users WHERE Username = 'admin'
+	) LIMIT 1;";
 
 	mysqli_multi_query($connection, $query);
-
 	mysqli_close($connection);
 }
 
