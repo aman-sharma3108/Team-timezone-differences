@@ -128,7 +128,7 @@
   ?>
   <h1>Sales Report Summary</h1>
   <form method="post" action="" id="new_sale">
-    <fieldset>
+    <fieldset class="salesum">
       <legend>Summary Control</legend>
       <p class="row">
         <label for="time_period">Time Period</label>
@@ -151,6 +151,7 @@
       </p>
     </fieldset>
   </form>
+  <article class="art1">
   <?php
       if (isset($sales)) {
         $number_of_sales = count($sales);
@@ -214,6 +215,7 @@
       else echo "<p>Sales table does not exist!</p>";
   
   ?>
+  </article>
   <?php
       include "./includes/footer.inc";
   ?>
