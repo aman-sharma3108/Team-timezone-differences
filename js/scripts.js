@@ -49,11 +49,18 @@ function init(){
         return false;
         });
 
-        var today = new Date();
-         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-         var dateTime = date+' '+time;
-         document.getElementById("dos").value = dateTime;
+        var aestTime = new Date().toLocaleString("en-US", {timeZone: "Australia/Melbourne"});
+        aestTime = new Date(aestTime);
+        var year = aestTime.getFullYear();
+        var month = aestTime.getMonth() + 1;
+        var day = aestTime.getDate();
+        if (month < 10){
+          month = "0" + month;
+        }
+        if (day < 10){
+          day = "0" + day;
+        }
+        document.getElementById('dos').value = year + "-" +month + "-" +day +"T"+ aestTime.getHours() + ":" +aestTime.getMinutes();
         
     }
 }

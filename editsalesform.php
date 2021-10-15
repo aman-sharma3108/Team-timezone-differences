@@ -63,7 +63,7 @@
             
             <p>
                 <label for="dos">Sale Date and Time</label> 
-                <input type="text" name= "dos" id="dos"/>
+                <input type="datetime-local" name= "dos" id="dos"/>
             </p>
 
             <?php
