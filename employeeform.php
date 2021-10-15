@@ -90,8 +90,16 @@
             ?>
             <p class="row">	
                 <label for="emp_pass">Employee Password: </label>
-                <input type="password" name="emp_pass" id="emp_pass" value="<?php if ($status == "invalid_input") echo $_SESSION["emp_pass"] ?>"/>
+                <input type="password" name="emp_pass" id="emp_pass" value=""/>
             </p>
+		
+	    <p class="row">	
+		<label for="role">Role: </label> 
+		<select id="role" name="role">
+		    <option value="employee">Employee</option>
+		    <option value="manager">Manager</option>
+		</select>
+	    </p>
             
             <p>	
                 <input type="submit" id="submit" name="submit" value="Confirm" />
