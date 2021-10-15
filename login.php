@@ -19,7 +19,10 @@
             <form action="process_login.php" method="post">
                 <h2>LOGIN</h2>
 
-<?php if (isset($_GET['error'])) { ?>
+<?php 
+    require_once ("./includes/db.inc.php");
+    mysqli_close($connection);// Close the database connect
+    if (isset($_GET['error'])) { ?>
 
     <p class="error"><?php echo $_GET['error']; ?></p>
 
