@@ -167,6 +167,6 @@
         // else {
         //     header("Location: employeeform.php?status=database_error");
         // }
-        // mysqli_close($connection);// Close the database connect
+        mysqli_close($connection);// Close the database connect
     }
 ?>
