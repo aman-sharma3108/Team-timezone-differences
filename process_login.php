@@ -74,7 +74,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
             }
             else //if the username does not exist
             {
-                header ("Location: ../index.php?error=Incorrect User name or password"); //return to the Login page with a message that the username does not exist
+                header ("Location: index.php?error=Incorrect User name or password"); //return to the Login page with a message that the username does not exist
                 exit();
             }
         }
