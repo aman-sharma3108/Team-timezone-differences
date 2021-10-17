@@ -64,7 +64,7 @@ if (isset($_SESSION['Login'])) {
 
 }else{
 
-     header("Location: login.php");
+     header("Location: logout.php");
 
      exit();
 
