@@ -1,12 +1,12 @@
 <?php
   session_start();
   if (!isset($_SESSION["Login"]) || !isset($_SESSION["Role"])) {
-    header ("location: login.php");
+    header ("location: logout.php");
     exit;
   }
   else {
     if ($_SESSION["Login"]!=true || $_SESSION["Role"]!="manager") {
-      header ("location: login.php");
+      header ("location: logout.php");
       exit;
     }
     else {
