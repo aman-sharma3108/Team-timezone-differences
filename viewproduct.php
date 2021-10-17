@@ -1,3 +1,16 @@
+<?php
+  session_start();
+  if (!isset($_SESSION["Login"])) {
+    header ("location: login.php");
+    exit;
+  }
+  else {
+    if ($_SESSION["Login"]!=true) {
+      header ("location: login.php");
+      exit;
+    }
+    else {
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,8 +107,6 @@
 
     <!-- new section-->
     <?php
-        session_start();
-
         function select_category($category) {
             if ($_SESSION["category"] == $category) {
               echo " selected=\"selected\"";
@@ -229,3 +240,6 @@
     ?>
 </body>
 </html>
+<?php
+}}
+?>
