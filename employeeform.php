@@ -31,8 +31,6 @@
 </head>
 <body>
     <?php
-        session_start();
-
         if(isset($_GET["status"]))
         {
             $status = $_GET["status"];
