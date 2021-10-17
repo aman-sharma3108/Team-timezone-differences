@@ -1,3 +1,16 @@
+<?php
+  session_start();
+  if (!isset($_SESSION["Login"])) {
+    header ("location: login.php");
+    exit;
+  }
+  else {
+    if ($_SESSION["Login"]!=true) {
+      header ("location: login.php");
+      exit;
+    }
+    else {
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,3 +105,6 @@
     ?>
 </body>
 </html>
+<?php
+}}
+?>
