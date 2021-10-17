@@ -1,12 +1,12 @@
 <?php
   session_start();
   if (!isset($_SESSION["Login"])) {
-    header ("location: login.php");
+    header ("location: logout.php");
     exit;
   }
   else {
     if ($_SESSION["Login"]!=true) {
-      header ("location: login.php");
+      header ("location: logout.php");
       exit;
     }
     else {
