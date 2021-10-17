@@ -1,3 +1,16 @@
+<?php
+  session_start();
+  if (!isset($_SESSION["Login"]) || !isset($_SESSION["Role"])) {
+    header ("location: login.php");
+    exit;
+  }
+  else {
+    if ($_SESSION["Login"]!=true || $_SESSION["Role"]!="manager") {
+      header ("location: login.php");
+      exit;
+    }
+    else {
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -221,3 +234,6 @@
   ?>
 </body>
 </html>
+<?php
+}}
+?>
