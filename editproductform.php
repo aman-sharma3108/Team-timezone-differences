@@ -1,3 +1,16 @@
+<?php
+  session_start();
+  if (!isset($_SESSION["Login"])) {
+    header ("location: login.php");
+    exit;
+  }
+  else {
+    if ($_SESSION["Login"]!=true) {
+      header ("location: login.php");
+      exit;
+    }
+    else {
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,8 +31,6 @@
 </head>
 <body>
     <?php
-        session_start();
-
         function select_category($category) {
             if (isset($_SESSION["category"])) {
                 if ($_SESSION["category"] == $category) {
@@ -122,3 +133,6 @@
     ?>
 </body>
 </html>
+<?php
+}}
+?>
