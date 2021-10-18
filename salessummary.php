@@ -234,7 +234,7 @@
       else echo "<p>Sales table does not exist!</p>";
   ?>
 
-    <button type="button" onclick="tableToCSV()" class="butt">
+    <button type="button" onclick="tableToCSV()" class="butt3">
         Download
     </button>
     <script type="text/javascript">
