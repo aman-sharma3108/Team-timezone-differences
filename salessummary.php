@@ -168,19 +168,25 @@
   <?php
       if (isset($sales)) {
         $number_of_sales = count($sales);
-        echo "Number of Sales: $number_of_sales\n<br>";
+        //echo "Number of Sales: $number_of_sales\n<br>";
 
         $net_revenue = 0;
         foreach($sales as $sale) {
           $net_revenue += floatval($sale["PriceTotal"]);
         }
-        echo "Net Revenue: $net_revenue\n<br>";
+        //echo "Net Revenue: $net_revenue\n<br>";
 
         $number_of_products_sold = 0;
         foreach($saledetails as $saledetail) {
           $number_of_products_sold += intval($saledetail["Quantity"]);
         }
-        echo "Number of Products Sold: $number_of_products_sold\n<br>";
+        //echo "Number of Products Sold: $number_of_products_sold\n<br>";
+
+        echo "<table border='1'>\n";
+        echo "<tr><th>Number of Sales</th><td>$number_of_sales</td></tr>\n";
+        echo "<tr><th>Net Revenue</th><td>$net_revenue</td></tr>\n";
+        echo "<tr><th>Number of Products Sold</th><td>$number_of_products_sold</td></tr>\n";
+        echo "</table>\n<br>";
 
         $revenue_per_product = [];
         foreach ($saledetails as $saledetail) {
@@ -190,7 +196,7 @@
           $revenue_per_product[$saledetail["ProductID"]] += floatval($saledetail["SubTotal"]);
         }
         arsort($revenue_per_product);
-        echo "Top 10 Revenue per Product:\n";
+        echo "<h3>Top 10 Revenue per Product:</h3>\n";
         echo "<table border='1'>\n";
         echo "<tr><th>ProductID</th><th>Revenue</th></tr>\n";
         $count = 10;
@@ -215,7 +221,7 @@
         foreach ($sales as $sale) {
           $revenue_per_day[date("l", strtotime($sale["SaleDateTime"]))] += $sale["PriceTotal"];
         }
-        echo "Revenue per Day:";
+        echo "<h3>Revenue per Day:</h3>";
         echo "<table border='1'>\n";
         echo "<tr><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th><th>Saturday</th><th>Sunday</th></tr>\n";
         echo "<tr>";
@@ -226,8 +232,49 @@
         echo "</table>\n<br>";
       }
       else echo "<p>Sales table does not exist!</p>";
-  
   ?>
+
+    <button type="button" onclick="tableToCSV()" class="butt">
+        Download
+    </button>
+    <script type="text/javascript">
+        function tableToCSV() {
+            var csv_data = [];
+            var rows = document.getElementsByTagName('tr');
+
+            for (var i = 0; i < rows.length; i++) {
+                var cols = rows[i].querySelectorAll('td,th');
+                var csvrow = [];
+
+                for (var j = 0; j < cols.length; j++) {
+                    csvrow.push(cols[j].innerHTML);
+                }
+                csv_data.push(csvrow.join(","));
+            }
+            csv_data = csv_data.join('\n');
+            downloadCSVFile(csv_data);
+        }
+ 
+        function downloadCSVFile(csv_data) {
+
+            CSVFile = new Blob([csv_data], {
+                type: "text/csv"
+            });
+ 
+            var temp_link = document.createElement('a');
+ 
+            temp_link.download = "SalesReportSummary.csv";
+            var url = window.URL.createObjectURL(CSVFile);
+            temp_link.href = url;
+ 
+            temp_link.style.display = "none";
+            document.body.appendChild(temp_link);
+
+            temp_link.click();
+            document.body.removeChild(temp_link);
+        }
+    </script>
+
   </article>
   <?php
       include "./includes/footer.inc";
