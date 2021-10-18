@@ -15,6 +15,7 @@ echo "
     </div>";
     if ($_SESSION["Login"]==true && $_SESSION["Role"]=="manager") {
         echo    " <a href='salessummary.php'>Sales Summary</a></li>
+                <a href='prediction.php'>Sales Prediction</a></li>
                 <a href='readcsv.php'>Read CSV</a></li>
                 <a href='employeeform.php'>Add Employee</a></li>";
   
