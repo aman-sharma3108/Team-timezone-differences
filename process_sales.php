@@ -192,6 +192,9 @@
             $subtotal = $subtotals[$i];
             $insert_query .= "INSERT INTO productsalelinks (SaleID, ProductID, Quantity, SubTotal)
             VALUES (@last_sales_id , '$product', '$quantity', '$subtotal');
+            UPDATE products
+            SET Stock = Stock - $quantity
+            WHERE ProductID = $product;
             ";
         }
         
