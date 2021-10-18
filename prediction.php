@@ -433,7 +433,7 @@
             echo "<tr><th>Net Revenue</th><td>$net_revenue</td><td>$daily_net_revenue</td><td>$cur_daily_net_revenue</td><td>$forecast_net_revenue</td></tr>\n";
             echo "<tr><th>Number of Products Sold</th><td>$number_of_products_sold</td><td>$daily_number_of_products_sold</td><td>$cur_daily_number_of_products_sold</td><td>$forecast_number_of_products_sold</td></tr>\n";
             echo "</table>";
-            echo "<smalltext>Generate through <strong>Historical Forecasting</strong> by comparing daily average: If daily average for this week is higher than previous, +5% on previous weekly average</smalltext>\n<br/><br/>";
+            echo "<smalltext>Generate through <strong>Historical Forecasting</strong> by comparing daily average: If daily average for this month is higher than previous, +5% on previous monthly average</smalltext>\n<br/><br/>";
         }
         else {
             $temp = "week";
