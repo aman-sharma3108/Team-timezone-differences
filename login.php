@@ -17,7 +17,7 @@
     <section>
         <p>
             <form action="process_login.php" method="post">
-                <h2>LOGIN</h2>
+                <h2>People Health Pharmacy Login</h2>
 
 <?php 
     require_once ("./includes/db.inc.php");
