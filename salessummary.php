@@ -191,19 +191,24 @@
         $revenue_per_product = [];
         foreach ($saledetails as $saledetail) {
           if (!array_key_exists($saledetail["ProductID"], $revenue_per_product)) {
-            $revenue_per_product[$saledetail["ProductID"]] = 0;
+            $revenue_per_product[$saledetail["ProductID"]]["revenue"] = 0;
+            $revenue_per_product[$saledetail["ProductID"]]["quantity"] = 0;
           };
-          $revenue_per_product[$saledetail["ProductID"]] += floatval($saledetail["SubTotal"]);
+          $revenue_per_product[$saledetail["ProductID"]]["revenue"] += floatval($saledetail["SubTotal"]);
+          $revenue_per_product[$saledetail["ProductID"]]["quantity"] += intval($saledetail["Quantity"]);
         }
-        arsort($revenue_per_product);
-        echo "<h3>Top 10 Revenue per Product:</h3>\n";
+        uasort($revenue_per_product, function($a, $b) {
+          return $b['revenue'] - $a['revenue'];
+        });
+        echo "Top 10 Revenue per Product:\n";
         echo "<table border='1'>\n";
-        echo "<tr><th>ProductID</th><th>Revenue</th></tr>\n";
+        echo "<tr><th>ProductID</th><th>Quantity</th><th>Revenue</th></tr>\n";
         $count = 10;
         $i = 0;
-        foreach($revenue_per_product as $productID => $revenue) {
+        foreach($revenue_per_product as $productID => $product) {
           echo "<tr><td>", $productID, "</td>\n";
-          echo "<td>", $revenue, "</td>\n";
+          echo "<td>", $product["quantity"], "</td>\n";
+          echo "<td>", $product["revenue"], "</td>\n";
           $i++;
           if ($i == $count) break;
         };
